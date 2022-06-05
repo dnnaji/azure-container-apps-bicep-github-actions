@@ -14,3 +14,12 @@ az deployment group create \
   --parameters \
     name='container-app'
 ```
+
+Get subscription id
+`az account show`
+
+```
+az ad sp create-for-rbac --name "myApp" --role contributor \
+    --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
+    --sdk-auth
+```
