@@ -15,7 +15,7 @@ az deployment group create \
     name='container-app'
 ```
 
-Get subscription id
+Get azure subscription id
 `az account show`
 
 ```
@@ -23,3 +23,6 @@ az ad sp create-for-rbac --name "myApp" --role contributor \
     --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
     --sdk-auth
 ```
+
+Delete everything from demo
+`az group delete --name re-aca`
