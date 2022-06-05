@@ -1,0 +1,30 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: rg-aca
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy bicep
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az deployment group create \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --template-file ./infra/main.bicep \
+              --parameters \
+                name='container-app'
